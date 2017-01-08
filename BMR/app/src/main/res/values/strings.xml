@@ -9,6 +9,7 @@
     <string name="weight">Weight (Kg)</string>
     <string name="exercise">Exercise</string>
     <string name="button_calculate">Calculate</string>
+    <string name="bn_camera">TAKE PICTURE (OPTIONAL)</string>
 
     <string name="bmr">BMR</string>
     <string name="calories">Calories</string>
