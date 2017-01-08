@@ -22,9 +22,34 @@
     </string-array>
 
     <string name="menu_share">SHARE</string>
-    <string name="menu_setting">Setting</string>
+    <string name="menu_setting">Settings</string>
     <string name="menu_save">SAVE</string>
     <string name="menu_history">HISTORY</string>
     <string name="menu_clear">CLEAR</string>
+
+
+    <!-- setting -->
+    <string name="title_history">History Title</string>
+    <string name="detail_title_history">Enter History Title</string>
+    <string name="pref_history">history_title</string>
+
+    <string name="title_limit">Limit number of history</string>
+    <string name="detail_title_limit">Select the maximum number of history</string>
+    <string name="pref_limit">limit_number_of_history</string>
+
+    <string-array name="list_limit">
+        <item>1 entry</item>
+        <item>2 entries</item>
+        <item>3 entries</item>
+        <item>5 entries</item>
+        <item>Unlimited entries</item>
+    </string-array>
+    <string-array name="list_limit_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>5</item>
+        <item>-1</item>
+    </string-array>
 
 </resources>

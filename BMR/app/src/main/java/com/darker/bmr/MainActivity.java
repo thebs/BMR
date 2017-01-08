@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -100,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 startActivity(getIntent());
                 return true;
+            case R.id.menu_setting:
+                Intent intent = new Intent(this, Preference.class);
+                startActivityForResult(intent, 1);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -180,9 +185,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void BMRDatabase(){
+
+        SharedPreferences share = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext());
+        String title = share.getString(getResources()
+                .getString(R.string.pref_history), "History Details");
+        int limit = Integer.parseInt(share.getString(getString(R.string.pref_limit), "-1"));
+
         DatabaseHandler db = new DatabaseHandler(this);
         String string = new String();
         int size = db.getBMRCount();
+        int count = 1;
         BMR b = new BMR();
 
         while (size > 0){
@@ -190,9 +203,12 @@ public class MainActivity extends AppCompatActivity {
             string += "TIME: " + b.getTime() + "\n";
             string += "BMR: " + b.getBmr() + "\n\n";
             size--;
+
+            if(count++ == limit)
+                break;
         }
 
-        showMessage("History Details", string);
+        showMessage(title, string);
     }
 
     public void delTable(){

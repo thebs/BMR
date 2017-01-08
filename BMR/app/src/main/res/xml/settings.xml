@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="@string/pref_history"
+        android:title="@string/title_history"
+        android:summary="@string/detail_title_history"/>
+    <ListPreference
+        android:key="@string/pref_limit"
+        android:title="@string/title_limit"
+        android:summary="@string/detail_title_limit"
+        android:entries="@array/list_limit"
+        android:entryValues="@array/list_limit_value"
+        android:defaultValue="-1"/>
+</PreferenceScreen>
