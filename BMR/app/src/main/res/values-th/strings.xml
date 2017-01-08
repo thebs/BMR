@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="app_name">บีเอ็มอาร์</string>
+    <string name="app_name2">ผลการคำนวณ</string>
+    <string name="gender">เพศ</string>
+    <string name="radio_male">ชาย</string>
+    <string name="radio_female">หญิง</string>
+    <string name="age">อายุ (ปี)</string>
+    <string name="height">ส่วนสูง (ซม.)</string>
+    <string name="weight">น้ำหนัก (กก.)</string>
+    <string name="exercise">การออกำลังกาย</string>
+    <string name="button_calculate">คำนวณ</string>
+
+    <string name="bmr">ค่าบีเอ็มอาร์</string>
+    <string name="calories">แคลอรี่</string>
+
+    <string-array name="exercise_array">
+        <item>ไม่ออกกำลังกาย</item>
+        <item>1-2 วันต่อสัปดาห์</item>
+        <item>3-5 วันต่อสัปดาห์</item>
+        <item>6-7 วันต่อสัปดาห์</item>
+        <item>นักกีฬาอาชีพ</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">BMR</string>
+    <string name="app_name2">BMR Result</string>
+    <string name="gender">Gender</string>
+    <string name="radio_male">Male</string>
+    <string name="radio_female">Female</string>
+    <string name="age">Age (Years)</string>
+    <string name="height">Height (Cm)</string>
+    <string name="weight">Weight (Kg)</string>
+    <string name="exercise">Exercise</string>
+    <string name="button_calculate">Calculate</string>
+
+    <string name="bmr">BMR</string>
+    <string name="calories">Calories</string>
+
+    <string-array name="exercise_array">
+        <item>None</item>
+        <item>1to2 days a week</item>
+        <item>3to5 days a week</item>
+        <item>6to7 days a week</item>
+        <item>Athlete (All the time)</item>
+    </string-array>
+
+    <string name="menu_share">SHARE</string>
+    <string name="menu_setting">Setting</string>
+    <string name="menu_save">SAVE</string>
+    <string name="menu_history">HISTORY</string>
+    <string name="menu_clear">CLEAR</string>
+
+</resources>
