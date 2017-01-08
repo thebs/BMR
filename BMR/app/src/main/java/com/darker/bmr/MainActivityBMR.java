@@ -1,14 +1,19 @@
 package com.darker.bmr;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -34,6 +39,15 @@ public class MainActivityBMR extends AppCompatActivity {
         TextView textView= (TextView) findViewById(R.id.bmr_result);
         textView.setTextSize(25);
         textView.setText(message);
+
+        SharedPreferences sharedPref = getSharedPreferences("photo", Context.MODE_PRIVATE);
+        String photoPath = sharedPref.getString("photoPath", "");
+
+        if(photoPath != null){
+            ImageView imageView = (ImageView) findViewById(R.id.img_person);
+            Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
+            imageView.setImageBitmap(bitmap);
+        }
     }
 
     @Override

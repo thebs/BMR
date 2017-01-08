@@ -3,10 +3,13 @@ package com.darker.bmr;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +18,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.darker.bmr.MESSAGE";
@@ -32,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
     private RadioButton radioButton;
+
+    private final static int REQUEST_IMAGE_CAPTURE = 1;
+    private final static int REQUEST_TAKE_PHOTO = 1;
+    private String photoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,5 +227,53 @@ public class MainActivity extends AppCompatActivity {
     public void delTable(){
         DatabaseHandler db = new DatabaseHandler(this);
         db.delTable();
+    }
+
+    public void onTakePictureClicked(View view){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(takePictureIntent.resolveActivity(getPackageManager()) != null){
+            File photo = null;
+            try{
+                photo = createImageFile();
+                SharedPreferences preferences = getSharedPreferences("photo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = preferences.edit();
+                edit.putString("photoPath", photoPath);
+                edit.commit();
+            }catch (IOException e){
+                Log.e("CreateImage", e.getMessage());
+            }
+
+            if(photo != null)
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bundle extras = data.getExtras();
+            Bitmap bitmap = (Bitmap) extras.get("data");
+
+            try {
+                FileOutputStream out = new FileOutputStream(photoPath);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+                out.flush();
+                out.close();
+            }catch (Exception e){
+                Log.e("Bitmap", e.getMessage());
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException{
+        String time = new SimpleDateFormat("ddMMyyyy_HHmmss_").format(new Date());
+        String imageFileName = "PNG_" + time + "_";
+        File storage = getExternalFilesDir(null);
+        File image = File.createTempFile(imageFileName, ".png", storage);
+        photoPath = image.getAbsolutePath();
+
+        return image;
     }
 }
